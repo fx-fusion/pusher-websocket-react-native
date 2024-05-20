@@ -71,6 +71,15 @@ class PusherWebsocketReactNativeModule(reactContext: ReactApplicationContext) :
         val (host, port) = arguments.getString("proxy")!!.split(':')
         options.proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress(host, port.toInt()))
       }
+      if (arguments.hasKey("host")) {
+        options.setHost(arguments.getString("host"))
+      }
+      if (arguments.hasKey("wsPort")) {
+        options.setWsPort(arguments.getString("wsPort"))
+      }
+      if (arguments.hasKey("wssPort")) {
+        options.setWsPort(arguments.getString("wssPort"))
+      }
       pusher = Pusher(arguments.getString("apiKey"), options)
       Log.i(TAG, "Start $pusher")
       promise.resolve(null)
